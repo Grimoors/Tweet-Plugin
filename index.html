@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <!-- Here we will have a window that Looks like a Tweet box -->
     <div class="tweet-box">
         <div class="tweet-box-header">
@@ -44,15 +45,7 @@
                 </div>
                 <div class="tweet-box-footer-right-tweet-btn">
                     <button id="clickToAnalyse">Analyse</button>
-                    <script>  
-                        // Testing out the button
-                        const PostButton = document.getElementById("clickToAnalyse");
 
-                        PostButton.addEventListener("click", () => {
-                            console.log("clicked the button");
-                        });
-
-                    </script>
                 </div>
             </div>
         </div>
@@ -92,6 +85,8 @@
         </div>
     </div>
     
+    <!-- Importing the JS files -->
+    <script src = "CheckLogin.js"></script>
     <script src="ShowUserDetails.js"></script>
     <script src="CharCounter.js"></script>
 </body>

@@ -13,6 +13,13 @@
 
 // Begin the js script
 
+// Testing out the button
+const PostButton = document.getElementById("clickToAnalyse");
+
+PostButton.addEventListener("click", () => {
+    console.log("clicked the button");
+});
+
 // Get the tweet box element from the DOM
 const tweetBox = document.getElementById("tweet");
 
