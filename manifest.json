@@ -1,0 +1,11 @@
+{
+    "name": "Tweet Char Counter",
+    "description": "A Tweet character counter.",
+    "author": "Vivek",
+    "version": "1.0",
+    "manifest_version": 1,
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "index.html"
+    }    
+}
