@@ -12,6 +12,11 @@
 
 
 // Begin the js script
+const PostButton = document.getElementById("clickToAnalyse");
+
+PostButton.addEventListener("click", () => {
+    console.log("clicked the button");
+});
 
 // Get the tweet box element from the DOM
 const tweetBox = document.getElementById("tweet");
@@ -28,11 +33,6 @@ tweetBox.addEventListener("input", () => {
   counter.innerHTML = `<h6>${charCount}/280</h6>`;
 });
 
-const PostButton = document.getElementById("clickToAnalyse");
-
-PostButton.addEventListener("click", () => {
-    console.log("clicked the button");
-});
 
 // // get the tweet box and the counter element
 // const tweetBox = document.getElementById("tweet");
