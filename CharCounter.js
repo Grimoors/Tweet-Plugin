@@ -31,8 +31,17 @@ tweetBox.addEventListener("input", () => {
   // Get the number of characters in the tweet box
   const charCount = tweetBox.value.length;
 
-  // Update the counter element with the number of characters
+  // If th length is more than 280 characters, set Flag_Overflow to true, and set the counter to red
+
+  // If the length is less than 280 characters, set Flag_Overflow to false, and set the counter to black
+  if (charCount > 280) {
+    // Update the counter element with the number of characters
+    counter.innerHTML = `<h6 style="color: red;">${charCount}/280</h6>`;
+  } else {
+    // Update the counter element with the number of characters
   counter.innerHTML = `<h6>${charCount}/280</h6>`;
+  }
+  
 });
 
 
