@@ -9,21 +9,20 @@
         "http://*/*",
         "https://*/*"
     ],
-    "background": {
-        "service_worker": ["background.js"]
-    },
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
-            "js": ["content.js"],
+            "js": ["CharCounter.js", "CheckLogin.js"],
             "run_at": "document_end"
         }
     ],
-    "default_locale": "en",
+    "background": {
+        "service_worker": "./background.js"
+    },
     "author": "Vivek",
-    "manifest_version": 3,
-    "browser_action": {
-        "default_icon": "icon.png",
+    "action": {
+        "default_title": "Tweet Plugin",
         "default_popup": "index.html"
-    }    
+    },
+    "manifest_version": 3
 }
