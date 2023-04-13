@@ -1,8 +1,28 @@
 {
-    "name": "Tweet Char Counter",
-    "description": "A Tweet character counter.",
-    "author": "Vivek",
+    "name": "Tweet Plugin",
     "version": "1.0",
+    "description": "A Tweet character counter.",
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "storage",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "background": {
+        "service_worker": ["background.js"]
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["content.js"],
+            "run_at": "document_end"
+        }
+    ],
+    "default_locale": "en",
+    "default_title": "Tweet Plugin",
+    "defult_popup": "index.html",
+    "author": "Vivek",
     "manifest_version": 1,
     "browser_action": {
         "default_icon": "icon.png",
