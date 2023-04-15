@@ -2,7 +2,8 @@
 
 const tf = require('@tensorflow/tfjs');
 
-model1_likepredictor = await tf.loadLayersModel('file://model_jsons/model1_likepredictor/model.json');
+model1_likepredictor = await tf.loadLayersModel('file://models/model_like_prediction/model.json');
+model2_sentimentpredictor = await tf.loadLayersModel('file://models/model_sentiment_prediction/model.json');
 
 // This element is to be called when we are clicking the button to analyse the tweet 
 
@@ -51,13 +52,38 @@ function Text_Updater( tweetTextTruncated ) {
     return tweetTextTruncated;
 }
 
+function preprocessText(text) {
+    // TODO: Perform any necessary preprocessing (e.g., tokenization, stopwords removal, stemming/lemmatization)
+    
+    const preprocessedText = text;
 
+    
+
+    return preprocessedText;
+}
+
+function convertTextToSequences(text) {
+    // TODO: Convert the preprocessed text to integer sequences using the tokenizer from training
+    return inputData;
+}
+
+function padOrTruncateSequences(inputData, maxLength) {
+    // TODO: Pad or truncate the sequences to the desired length
+    return paddedInputData;
+}
 
 function Text_Analyser( tweetTextTruncated ) {
-    // Analyse the text to see if it is offensive
-    // If the text is offensive, return true
-    // If the text is not offensive, return false
-    // Return the result of the analysis
+
+    const preprocessedtext = preprocessText(tweetTextTruncated);
+    const sequences = convertTextToSequences(preprocessedtext);
+    const paddedInputData = padOrTruncateSequences(sequences, 280);
+
+    const prediction = model1_likepredictor.predict(paddedInputData);
+    const prediction2 = model2_sentimentpredictor.predict(paddedInputData);
+
+    console.log( "Likes Predicted = "   , prediction);
+    console.log( "Sentiment Predicted = "   , prediction2);
+    
     return true;
 }
 
