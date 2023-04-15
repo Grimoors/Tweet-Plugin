@@ -1,6 +1,19 @@
 // Import tensorflow js from <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
-const tf = require('@tensorflow/tfjs');
+const scriptUrl = chrome.extension.getURL('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js');
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', scriptUrl, true);
+xhr.onload = function() {
+  if (xhr.status === 200) {
+    const script = document.createElement('script');
+    script.textContent = xhr.responseText;
+    document.head.appendChild(script);
+  }
+};
+xhr.send();
+
+
 const natural = require('natural');
 const tokenizer = new natural.WordTokenizer();
 const stopWords = new natural.Stopwords();
@@ -106,7 +119,7 @@ function convertTextToSequences(text) {
 function padOrTruncateSequences(inputData, maxLength) {
     // TODO: Pad or truncate the sequences to the desired length
     const paddedInputData = inputData;
-    
+
     return paddedInputData;
 }
 
