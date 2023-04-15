@@ -1,3 +1,9 @@
+// Import tensorflow js from <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+
+const tf = require('@tensorflow/tfjs');
+
+model1_likepredictor = await tf.loadLayersModel('file://model_jsons/model1_likepredictor/model.json');
+
 // This element is to be called when we are clicking the button to analyse the tweet 
 
 // // // Path: index.html
@@ -55,7 +61,12 @@ function Text_Analyser( tweetTextTruncated ) {
     return true;
 }
 
+
+
 function Main(){
+    
+
+
     // Get the text from the tweet box
     const tweetText = Text_Getter();
     // Truncate the text to 280 characters
@@ -74,3 +85,4 @@ function Main(){
         console.log ( "false" );
     }
 }
+
