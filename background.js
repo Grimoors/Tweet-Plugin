@@ -1,6 +1,10 @@
 // Import tensorflow js from <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
 const tf = require('@tensorflow/tfjs');
+const natural = require('natural');
+const tokenizer = new natural.WordTokenizer();
+const stopWords = new natural.Stopwords();
+
 
 model1_likepredictor = await tf.loadLayersModel('file://models/model_like_prediction/model.json');
 model2_sentimentpredictor = await tf.loadLayersModel('file://models/model_sentiment_prediction/model.json');
@@ -54,21 +58,55 @@ function Text_Updater( tweetTextTruncated ) {
 
 function preprocessText(text) {
     // TODO: Perform any necessary preprocessing (e.g., tokenization, stopwords removal, stemming/lemmatization)
+    //using natural library
     
-    const preprocessedText = text;
 
-    
+        // convert to lowercase
+    text = text.toLowerCase();
+
+    // tokenize text
+    const tokens = tokenizer.tokenize(text);
+
+    // remove stopwords
+    const filteredTokens = tokens.filter(token => !stopWords.contains(token));
+
+    // stem words
+    const stemmer = natural.PorterStemmer;
+    const stemmedTokens = filteredTokens.map(token => stemmer.stem(token));
+
+    // join tokens back into a string
+    text = stemmedTokens.join(' ');
+
+    const preprocessedText = text;
 
     return preprocessedText;
 }
 
 function convertTextToSequences(text) {
     // TODO: Convert the preprocessed text to integer sequences using the tokenizer from training
+
+    const CountVectorizer = require('natural').CountVectorizer;
+
+    // create the vectorizer
+    const vectorizer = new CountVectorizer();
+
+    // fit the vectorizer on the preprocessed text data
+    vectorizer.fit([preprocessedTweet]);
+
+    // transform the preprocessed text data into numerical features
+    const transformedTweet = vectorizer.transform(preprocessedTweet);
+
+    console.log(transformedTweet); // sparse vector representation of the tweet
+
+
+
     return inputData;
 }
 
 function padOrTruncateSequences(inputData, maxLength) {
     // TODO: Pad or truncate the sequences to the desired length
+    const paddedInputData = inputData;
+    
     return paddedInputData;
 }
 
