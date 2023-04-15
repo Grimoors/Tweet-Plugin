@@ -1,5 +1,8 @@
 # Hidden Functions
 
+import os
+import sys
+
 def _ensure_all_requirements_are_installed():
 
     try:
@@ -46,10 +49,36 @@ def _ensure_all_requirements_are_installed():
         except ImportError:
             print("h5py could not be installed. Please install it manually.")
             exit(2)
+    
+    try:
+        import tensorflowjs as tfjs
+    except ImportError:
+        print("Tensorflowjs is not installed. Please install it before using this script.")
+        
+        print("Attempting to install Tensorflowjs...")
+        import pip
+        pip.main(['install', 'tensorflowjs'])
+
+        try:
+            import tensorflowjs as tfjs
+        except ImportError:
+            print("Tensorflowjs could not be installed. Please install it manually.")
+            exit(2)
+    
     pass
+
 
 def _read_h5_file(filename):
     """Reads a HDF5 file and returns a dictionary with the data"""
+    import h5py
+    f = h5py.File(filename, 'r')
+    data = {}
+    for key in f.keys():
+        data[key] = f[key].value
+    return data
+
+def _read_h4_file(filename):
+    """Reads a HDF4 file and returns a dictionary with the data"""
     import h5py
     f = h5py.File(filename, 'r')
     data = {}
@@ -72,9 +101,14 @@ def _convert_h5_model(path, out_path, out_format, model_name):
     if debug:
         print("Converting model: " + model_name)
         # print Model Data
-        print(" Calling the _read_h5_file function to read the model data... ; Passing the following arguments: " + path + model_name)  
-        print("Model Data:")
-        print(_read_h5_file(path + model_name))
+
+        # calling the command on the BASH terminal : 
+        # tensorflowjs_converter --input_format keras \
+        #                path/to/my_model.h5 \
+        #                path/to/tfjs_target_dir
+        
+        os.system("tensorflowjs_converter --input_format keras " + path + model_name + " " + out_path + model_name + ".json")
+
 
 
 
