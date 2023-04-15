@@ -13,14 +13,16 @@ xhr.onload = function() {
 };
 xhr.send();
 
+// Import tensorflow js from <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
+// const tf = require('@tensorflow/tfjs');
 const natural = require('natural');
 const tokenizer = new natural.WordTokenizer();
 const stopWords = new natural.Stopwords();
 
 
-model1_likepredictor = await tf.loadLayersModel('file://models/model_like_prediction/model.json');
-model2_sentimentpredictor = await tf.loadLayersModel('file://models/model_sentiment_prediction/model.json');
+model1_likepredictor =  tf.loadLayersModel('file://models/model_like_prediction/model.json');
+model2_sentimentpredictor =  tf.loadLayersModel('file://models/model_sentiment_prediction/model.json');
 
 // This element is to be called when we are clicking the button to analyse the tweet 
 
@@ -119,7 +121,7 @@ function convertTextToSequences(text) {
 function padOrTruncateSequences(inputData, maxLength) {
     // TODO: Pad or truncate the sequences to the desired length
     const paddedInputData = inputData;
-
+    
     return paddedInputData;
 }
 
