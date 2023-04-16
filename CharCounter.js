@@ -6,6 +6,12 @@
 //     <h6>0/280</h6>
 // </div>
 
+//If successfully added to the index.html file, 
+// Console should show the following message
+//" Successfully added the script to the index.html file - CharCounter.js"
+
+console.log("Successfully added the script to the index.html file - CharCounter.js");
+
 // in the index .html file
 
 // // Path: index.html
