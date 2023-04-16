@@ -1,6 +1,19 @@
+
+// Receive a message from a content script
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    console.log("Received message from content script:", message);
+  });
+  
+  // Send a message to a content script
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {text: "Hello from background page!"});
+  });
+  
+
+
 // Import tensorflow js from <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
-const scriptUrl = chrome.extension.getURL('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js');
+const scriptUrl = 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js'
 
 const xhr = new XMLHttpRequest();
 xhr.open('GET', scriptUrl, true);
@@ -143,7 +156,8 @@ function Text_Analyser( tweetTextTruncated ) {
 
 
 function Main(){
-    
+    // Get the results portion of the DOM
+    const results = document.getElementById("resulter");
 
 
     // Get the text from the tweet box
@@ -157,6 +171,10 @@ function Main(){
     // If the text is offensive, return true
     if (tweetTextAnalysis === true) {
         // Return the truncated text
+
+        // Change the results portion of the DOM to be red
+        results.style.color = "red";
+        results.innerHTML = "The Tweet is Offensive";
 
         console.log( tweetTextTruncated );
     } else {

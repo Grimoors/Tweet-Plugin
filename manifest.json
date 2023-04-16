@@ -17,7 +17,8 @@
         }
     ],
     "background": {
-        "service_worker": "./background.js"
+        "page": "background.html",
+        "service_worker": "./test.js"
     },
     "author": "Vivek",
     "action": {
