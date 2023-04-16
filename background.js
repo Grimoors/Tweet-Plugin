@@ -127,6 +127,8 @@ function convertTextToSequences(text) {
     // add the preprocessed text to the tf-idf object
     tfidf.addDocument(text);
 
+    console.log (tfidf.listTerms(0) , "This is the tfidf list terms");
+
     // get the tf-idf weights for the preprocessed text
     const transformedText = tfidf.listTerms(0).map(item => item.tfidf);
 
@@ -162,22 +164,35 @@ function Text_Analyser( tweetTextTruncated ) {
     console.log ("Sequences = " , sequences);
 
     console.log ("Padding or Truncating the sequences to the desired length, calling the function padOrTruncateSequences()"    );
-    const paddedInputData = padOrTruncateSequences(sequences, 1);
+    const paddedInputData = padOrTruncateSequences(sequences, 1202);
     console.log ("Padded Input Data = " , paddedInputData);
-
+    console.log ("Padded Input Data Length = " , paddedInputData.length);
+    console.log("Padded Input Data Type = " , typeof paddedInputData);
+    console.log("Padded Input Data Shape = " , paddedInputData.shape);
     // const prediction = model1_likepredictor.predict(paddedInputData);
     
+    const inputData = tf.tensor2d( paddedInputData , [1, 1202]);
+
     model1_likepredictor.then(function(model) {
+        const inputShape = model.layers[0].inputShape;
+        console.log(inputShape);
         // use the model object here
-        const prediction = model.predict(paddedInputData);
+        const prediction = model.predict(inputData);
         console.log( "Likes Predicted = "   , prediction);
     });
 
-    const prediction2 = model2_sentimentpredictor.predict(paddedInputData);
+    // const prediction2 = model2_sentimentpredictor.predict(paddedInputData);
 
+    model2_sentimentpredictor.then(function(model) {
+        const inputShape = model.layers[0].inputShape;
+        console.log(inputShape);
+        // use the model object here
+        const prediction = model.predict(inputData);
+        console.log( "Likes Predicted = "   , prediction);
+    });
 
     // console.log( "Likes Predicted = "   , prediction);
-    console.log( "Sentiment Predicted = "   , prediction2);
+    // console.log( "Sentiment Predicted = "   , prediction2);
     
     return true;
 }
