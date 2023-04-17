@@ -144,6 +144,9 @@ PostButton.addEventListener("click", function () {
   console.log("clicked the button");
 });
 
+//Get the id = "predicted_1" element from the DOM
+var predicted_1 = document.getElementById("predicted_1");
+
 // Get the tweet box element from the DOM
 var tweetBox = document.getElementById("tweet");
 
@@ -165,6 +168,10 @@ tweetBox.addEventListener("input", function () {
     // Update the counter element with the number of characters
     counter.innerHTML = "<h6>".concat(charCount, "/280</h6>");
   }
+  //Update the predicted_1 element with empty 
+  predicted_1.innerHTML = "";
+  //Update the predicted_2 element with empty
+  predicted_2.innerHTML = "";
 });
 
 // // get the tweet box and the counter element
@@ -204,7 +211,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51953" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57067" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

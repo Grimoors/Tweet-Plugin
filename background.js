@@ -152,6 +152,11 @@ function padOrTruncateSequences(inputData, maxLength) {
     return paddedInputData;
 }
 
+// Get Update positions for predicted_1 and predicted_2 in the DOM
+const predicted_1 = document.getElementById("predicted_1");
+const predicted_2 = document.getElementById("predicted_2");
+
+
 function Text_Analyser( tweetTextTruncated ) {
     console.log ("function Text_Analyser() called");
 
@@ -178,22 +183,53 @@ function Text_Analyser( tweetTextTruncated ) {
         console.log(inputShape);
         // use the model object here
         const prediction = model.predict(inputData);
-        console.log( "Likes Predicted = "   , prediction);
+        // fs.writeFile('./modelpred.txt', prediction, function (err) {
+        //     if (err) return console.log(err);
+        //     console.log('Hello World > helloworld.txt');
+        // });
+        prediction.data().then(function(data) {
+            console.log( "Likes Predicted = "   , JSON.stringify(prediction) , data[0] );
+            // Pass this to CharCounter.js
+
+            const likes = Math.floor( data[0] );
+            console.log(likes);
+            predicted_1.innerHTML = `<h6>Likes = ${likes}</h6>`;
+
+        });
+        
     });
 
     // const prediction2 = model2_sentimentpredictor.predict(paddedInputData);
 
-    model2_sentimentpredictor.then(function(model) {
-        const inputShape = model.layers[0].inputShape;
+    model2_sentimentpredictor.then(function(model2) {
+        const inputShape = model2.layers[0].inputShape;
         console.log(inputShape);
         // use the model object here
-        const prediction = model.predict(inputData);
-        console.log( "Likes Predicted = "   , prediction);
+        const prediction = model2.predict(inputData);
+        // const fs = require('fs');
+        // fs.writeFile('./model2pred.txt', prediction, function (err) {
+        //     if (err) return console.log(err);
+        //     console.log('Hello World > helloworld.txt');
+        //     });
+        console.log( "Sentiment Predicted = "   , JSON.stringify(prediction) , prediction.data() );
+        // Get the prediction from the model
+        prediction.data().then(function(data) {
+            console.log( "Sentiment Predicted = "   , JSON.stringify(prediction) , data[0] );
+            // Pass this to CharCounter.js
+            const sentiment =   data[0] ;
+            console.log(sentiment);
+
+            predicted_2.innerHTML = `<h6>Sentiment = ${sentiment}</h6>`;
+
+        });
+        
     });
 
     // console.log( "Likes Predicted = "   , prediction);
     // console.log( "Sentiment Predicted = "   , prediction2);
     
+    // Get the prediction from the model
+
     return true;
 }
 

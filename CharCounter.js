@@ -26,6 +26,9 @@ PostButton.addEventListener("click", () => {
     console.log("clicked the button");
 });
 
+//Get the id = "predicted_1" element from the DOM
+const predicted_1 = document.getElementById("predicted_1");
+
 // Get the tweet box element from the DOM
 const tweetBox = document.getElementById("tweet");
 
@@ -47,7 +50,13 @@ tweetBox.addEventListener("input", () => {
     // Update the counter element with the number of characters
   counter.innerHTML = `<h6>${charCount}/280</h6>`;
   }
+    //Update the predicted_1 element with empty 
+    predicted_1.innerHTML = ``;
+    //Update the predicted_2 element with empty
+    predicted_2.innerHTML = ``;
   
+
+
 });
 
 
