@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@parcel/config-webextension": "^2.8.3",
+    "@tensorflow/tfjs": "^4.4.0",
+    "natural": "^6.2.0",
+    "parcel-bundler": "^1.12.5",
+    "stopwords": "^0.0.9",
+    "yarm": "^0.4.0",
+    "yarn": "^1.22.19"
+  }
+}
