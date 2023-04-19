@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@parcel/config-webextension": "^2.8.3",
     "@tensorflow/tfjs": "^4.4.0",
     "natural": "^6.2.0",
     "parcel-bundler": "^1.12.5",
